@@ -11,6 +11,7 @@ class Note:
         pass
 
     def get_note(self, city_name, code):
+        """Scrap a note from a city"""
         content = BeautifulSoup(
             requests.get(
                 "https://www.bien-dans-ma-ville.fr/" + slugify(f"{city_name} {code}")

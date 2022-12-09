@@ -17,6 +17,7 @@ class City:
     def get_list(
         self, surface: float, departement: str, max_loyer: float
     ) -> pd.DataFrame:
+        """Get the list cities"""
         db = DBManager()
 
         # Check if scrapped
@@ -36,6 +37,7 @@ class City:
         return data[data["loyer"] * surface < max_loyer]
 
     def scrap(self, departement: str) -> List[str]:
+        """Scrap data for a given departement"""
         # Scrap data
         logger.info("Scrap gouv")
         city_informations = Gouv().scrap(departement)

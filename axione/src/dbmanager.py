@@ -76,6 +76,7 @@ class DBManager:
         return cursor
 
     def check_if_scrapped(self, departement: str) -> bool:
+        """Check if a departement is scrapped"""
         cursor = self.query(
             f"""
             SELECT departement 
@@ -85,6 +86,7 @@ class DBManager:
         return len(cursor.fetchall()) > 0
 
     def get_cities(self, departement: str) -> List:
+        """Get the informations relatives to city"""
         return self.query(
             f"""
             SELECT * 

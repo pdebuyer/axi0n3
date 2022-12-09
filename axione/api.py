@@ -17,11 +17,13 @@ logging.basicConfig(
 
 @app.get("/")
 def read_root():
+    """Check health"""
     return {"Hello": "World"}
 
 
 @app.get("/best_city")
 def get_cities(departement: str, max_loyer: str, surface: str):
+    """Asked API"""
     city = City()
     return city.get_list(
         departement=departement, max_loyer=float(max_loyer), surface=float(surface)
@@ -29,5 +31,6 @@ def get_cities(departement: str, max_loyer: str, surface: str):
     
 @app.get("/rollback")
 def rollback():
+    """If needed (never but in case)"""
     DBManager().get_connector().execute("ROLLBACK")
     return {"roll": "back"}

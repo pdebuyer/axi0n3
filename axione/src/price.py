@@ -6,6 +6,7 @@ class Price:
         pass
 
     def scrap(self, city_dataframe: pd.DataFrame) -> pd.DataFrame:
+        """Add loyer"""
         data = pd.read_csv(
             "axione/data/indicateurs-loyers-appartements.csv",
             sep=";",
