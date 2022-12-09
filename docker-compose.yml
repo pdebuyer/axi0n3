@@ -1,0 +1,23 @@
+
+version: '3'
+services:
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+
+    environment:
+      POSTGRES_USER: axione # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: paul # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB: postgres # The PostgreSQL default database (automatically created at first launch)
+    
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+  
+  server:
+    image: 'axione_api:latest'
+    ports: 
+    - 8000:8000
+    - 8001:8001
+    depends_on:
+      - "database"
