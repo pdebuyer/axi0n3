@@ -33,7 +33,8 @@ class City:
             columns=TABLE_COLUMNS,
         )
         data["loyer"] = pd.to_numeric(data["loyer"])
-
+        data["note"] = pd.to_numeric(data["note"])
+        
         # Get results
         return data[data["loyer"] * surface < max_loyer]
 
