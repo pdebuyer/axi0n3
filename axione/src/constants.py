@@ -15,4 +15,12 @@ CREATE TABLE IF NOT EXISTS public.city
     """CREATE INDEX IF NOT EXISTS city ON city (departement)""",  # Speed up query
 ]
 
-TABLE_COLUMNS = ["nom", "departement", "code", "code_postal", "loyer", "population", "note"]
+TABLE_COLUMNS = [
+    "nom",
+    "departement",
+    "code",
+    "code_postal",
+    "loyer",
+    "population",
+    "note",
+]

@@ -66,14 +66,19 @@ class Gouv:
             ...
         ]
         """
-        list_city = self.get_list_communes(departement=departement)
-        logger.info(f"Number of cities {len(list_city)}")
+        try:
+            list_city = self.get_list_communes(departement=departement)
+            logger.info(f"Number of cities {len(list_city)}")
 
-        for city in list_city:
-            city_data = self.get_communes_informations(commune_code=city["code"])
-            city_data["codesPostaux"] = city_data["codesPostaux"][0]
-            city.update(city_data)
-        
-        logger.info(f"Number of cities {len(list_city)}")
+            for city in list_city:
+                city_data = self.get_communes_informations(commune_code=city["code"])
+                city_data["codesPostaux"] = city_data["codesPostaux"][0]
+                city.update(city_data)
 
-        return list_city
+            logger.info(f"Number of cities {len(list_city)}")
+
+            return list_city
+        except Exception as e:
+            logger.error("No city")
+            logger.error(str(e))
+            return []

@@ -10,6 +10,7 @@ from .price import Price
 
 from .constants import TABLE_COLUMNS
 
+
 class City:
     def __init__(self) -> None:
         pass
@@ -28,11 +29,11 @@ class City:
         # Get data
         logger.info("Get the data")
         data = pd.DataFrame(
-            db.get_cities(departement=departement), 
+            db.get_cities(departement=departement),
             columns=TABLE_COLUMNS,
         )
         data["loyer"] = pd.to_numeric(data["loyer"])
-        
+
         # Get results
         return data[data["loyer"] * surface < max_loyer]
 
@@ -41,6 +42,8 @@ class City:
         # Scrap data
         logger.info("Scrap gouv")
         city_informations = Gouv().scrap(departement)
+        if not city_informations:
+            return
         logger.info("Scrap Notes Bien dans ma ville")
         cities_with_notes = Note().scrap(city_informations)
         logger.info("Scrap Prices")
@@ -49,4 +52,7 @@ class City:
         cities_with_price["departement"] = departement
         # Save it
         db = DBManager()
-        db.add_to_table(cities_with_price.rename(columns={"codesPostaux": "code_postal"}), table="city")
+        db.add_to_table(
+            cities_with_price.rename(columns={"codesPostaux": "code_postal"}),
+            table="city",
+        )
